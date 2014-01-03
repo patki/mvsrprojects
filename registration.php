@@ -1,7 +1,9 @@
 <?php
 	try {
+	
     $conn = new PDO ( "sqlsrv:server = tcp: u75q82f4s7.database.windows.net,1433; Database = mvsrprojects", "mydays", "azure@pwd112");
     $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+	if($conn)
 	print("connected");
     }
    catch ( PDOException $e ) {
