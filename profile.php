@@ -1,53 +1,53 @@
-<html>
-<head>
-
-<link rel="stylesheet" href="css/bootstrap.css"/>
-
-</head>
-<body>
-<h2> <?php $registrant['email']?> </h2>
-<h2> <?php $registrant['username']?> </h2>
-<h2> <?php $registrant['studentid']?> </h2>
-<h2> <?php $registrant['department']?> </h2>
 <?php
-include "profile.html";
+ob_start();
 session_start();
-    // DB connection info
-    //TODO: Update the values for $host, $user, $pwd, and $db
-    //using the values you retrieved earlier from the portal.
-    // Connect to database.
-    try {
-          $conn = new PDO ( "sqlsrv:server = tcp:j66k9fh59y.database.windows.net,1433; Database = database", "vishwas", "HelloWorld12");      
-            $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-    }
-    
-    catch(Exception $e){
-        die(var_dump($e));
-    }
-	
-	//$username=$_GET['id'];
-	//retrival of database
-	 $sql_select = "SELECT * FROM register where username='".$_SESSION["username"]."'";
-     $stmt = $conn->query($sql_select);
-	  $registrants = $stmt->fetchAll();
-	  
-	 echo count($registrants);
-	 echo "<h2>your account details</h2>";
-        echo "<table class='table' >";
-        echo "<tr><th>Name</th>";
-        echo "<th>email</th>";
-		echo "<th>studentid</th>";
-        echo "<th>department</th></tr>";
-        foreach($registrants as $registrant) {
-            echo "<tr><td>".$registrant['username']."</td>";
-            echo "<td>".$registrant['email']."</td>";
-			echo "<td>".$registrant['studentid']."</td>";
-            echo "<td>".$registrant['department']."</td></tr>";
+include "profile.html";
+$conn =mysql_connect("localhost","root","");
+if($conn)
+{
+ if(mysql_select_db("matrimony")){
+
+//echo "connected...";
+
+ }
+
+}
+
+$titles=array("Name","Age","Gender","Religion","Mother-tongue","Country","Mobile","Email");
+
+if(isset($_POST["username"]))
+{
+        if(!empty($_POST["username"]))
+        {
+         $query="select * from register where username='".$_POST['username']."';";
+         $result=mysql_query($query);
+         $numrows=mysql_num_rows($result);
+         if ($numrows==0) {
+	     echo "<center><h2 style=color:#FFF>No results found</h2></center>";
+          }
+         else{
+           while($row=mysql_fetch_row($result)){
+             $url="data:image/jpeg;base64,".base64_encode($row[9]);
+	         echo "<img src=".$url."  style=height:240px;width:300px;margin-left:100px class=img-rounded >";
+             echo "<legend class=offset1 style=color:#FFF><b>Personal info</b></legend>";
+               for($i=0;$i<=7;$i++){
+                 echo "<table class=table table-bordered  style=height:30px;width:300px;margin-left:200px;color:#FFF>";
+                 echo "<tbody>";
+  				 echo "<tr class=text-left>";
+  				 echo "<td>".$titles[$i]."</td>";
+  				 echo "<td>".$row[$i]."</td>";
+  				 echo "</tr>";
+  				 echo "</tbody>";
+  				 echo "</table> ";
+                 }
+               echo "<hr></hr>";
+             }
+
+            }      
         }
-        echo "</table>";
-    
-	
-		?>
-		
-        </body>
-</html>
+}
+if (empty($_POST['username'])) {
+
+	echo "No results found";
+}
+?>
