@@ -10,12 +10,11 @@
    }
    if(!empty($_POST)) {
     try {
-        $name = $_POST['username'];
+        echo "$name = $_POST['username']";
         $email = $_POST['email'];
 		$password=$_POST['password'];
         // Insert data
-        $sql_insert = "INSERT INTO registration(name, email, date) 
-                   VALUES (?,?,?)";
+        $sql_insert = "INSERT INTO registration(name, email, password) VALUES (?,?,?)";
         $stmt = $conn->prepare($sql_insert);
         $stmt->bindValue(1, $name);
         $stmt->bindValue(2, $email);
