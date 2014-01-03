@@ -10,7 +10,7 @@
    }
    if(!empty($_POST)) {
     try {
-        echo "$name = $_POST['username']";
+        $name = $_POST['username'];
         $email = $_POST['email'];
 		$password=$_POST['password'];
         // Insert data
@@ -25,6 +25,6 @@
         die(var_dump($e));
     }
     echo "<h3>Your're registered!</h3>";
-    }
+    
  
 ?>
