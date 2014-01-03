@@ -13,6 +13,7 @@
         $email = $_POST['email'];
 		$password=$_POST['password'];
         // Insert data
+		echo $name;
         $sql_insert = "INSERT INTO registration (name, email, password) VALUES (?,?,?)";
         $stmt = $conn->prepare($sql_insert);
         $stmt->bindValue(1, $name);
