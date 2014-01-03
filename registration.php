@@ -15,8 +15,8 @@
         $email = $_POST['email'];
 		$password=$_POST['password'];
         // Insert data
-		//$sql_insert = "INSERT INTO registration_tb1 (id,name,email,password) VALUES (1,abc,sgds,sdhs)";
-        $sql_insert = "INSERT INTO registration_tb1 (name,email,password) VALUES (?,?,?)";
+		//$sql_insert = "INSERT INTO registratio_tb1 (id,name,email,password) VALUES (1,abc,sgds,sdhs)";
+        $sql_insert = "INSERT INTO reg_tb1 (name,email,password) VALUES (?,?,?)";
         $stmt = $conn->prepare($sql_insert);
         $stmt->bindValue(1, $name);
         $stmt->bindValue(2, $email);
