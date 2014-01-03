@@ -13,14 +13,14 @@
         $email = $_POST['email'];
 		$password=$_POST['password'];
         // Insert data
-		
-        $sql_insert = "INSERT INTO registration (name,email,password) VALUES (?,?,?)";
+		$sql_insert = "INSERT INTO registration (id,name,email,password) VALUES (1,abc,sgds,sdhs)";
+       /* $sql_insert = "INSERT INTO registration (name,email,password) VALUES (?,?,?)";
         $stmt = $conn->prepare($sql_insert);
         $stmt->bindValue(1, $name);
         $stmt->bindValue(2, $email);
         $stmt->bindValue(3, $password);
         $stmt->execute();
         echo "<h3>Your're registered!</h3>";
-    
+    */
  
 ?>
