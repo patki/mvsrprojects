@@ -8,6 +8,19 @@
    print( "Error connecting to SQL Server." );
    die(print_r($e));
    }
-  
+  echo "hi";
+        $name = $_POST['username'];
+        $email = $_POST['email'];
+		$password=$_POST['password'];
+        // Insert data
+        $sql_insert = "INSERT INTO registration (name, email, password) VALUES (?,?,?)";
+        $stmt = $conn->prepare($sql_insert);
+        $stmt->bindValue(1, $name);
+        $stmt->bindValue(2, $email);
+        $stmt->bindValue(3, $password);
+        $stmt->execute();
+    
+    echo "<h3>Your're registered!</h3>";
+    
  
 ?>
